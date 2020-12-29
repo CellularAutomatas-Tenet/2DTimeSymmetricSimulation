@@ -10,6 +10,7 @@ class State:
         self.state = new_state
 
     def move(self, direction, square_size):
-        self.position = ((self.position[0] + direction[0]) % square_size, (self.position[1] + direction[1]) % square_size)
+        self.position = ((self.position[0] + direction[0]) % square_size,
+                         (self.position[1] + direction[1]) % square_size)
 
 

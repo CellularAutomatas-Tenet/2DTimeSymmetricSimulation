@@ -13,7 +13,7 @@ automate.STATES_COUNT = int(input('Введите количество сост�
 automate.SQUARE_SIZE = int(input('Введите размер квадрата'))
 automate.PERMUTATION = [[(i, j) for j in range(automate.SQUARE_SIZE)] for i in range(automate.SQUARE_SIZE)]
 
-field = [[State.State(0, (i % automate.SQUARE_SIZE, j % automate.SQUARE_SIZE)) for i in range(field_size)] for j in range(field_size)]
+field = [[State.State(0, (j % automate.SQUARE_SIZE, i % automate.SQUARE_SIZE)) for i in range(field_size)] for j in range(field_size)]
 
 print('Теперь введите по очереди все состояния ячеек в формате "x y state"\n')
 print('Когда закончите, напишите "-1"\n')
@@ -32,30 +32,20 @@ automate.OFFSET = tuple(map(int, input('Введите сдвиг в форма�
 
 reversed_automate = automate.invert()
 field_2 = deepcopy(field)
-Visualization.draw(field, field_2, automate, reversed_automate)
-pygame.display.flip()
 
 running = True
 while running:
+    Visualization.draw(field, field_2, automate, reversed_automate)
     for event in pygame.event.get():
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_RETURN:
                 field = automate.apply_function(field)
-                field_2 = automate.apply_function(field_2)
-                Visualization.draw(field, field_2, automate, reversed_automate)
+                field_2 = reversed_automate.apply_function(field_2)
+
             if event.key == pygame.K_SPACE:
-                tmp = deepcopy(field)
-                field = field_2
-                field_2 = deepcopy(tmp)
-
-                field = automate.apply_function(field)
+                field = reversed_automate.apply_function(field)
                 field_2 = automate.apply_function(field_2)
 
-                tmp1 = deepcopy(field)
-                field = field_2
-                field_2 = deepcopy(tmp)
-                Visualization.draw(field, field_2, automate, reversed_automate)
-        # проверить закрытие окна
         if event.type == pygame.QUIT:
             running = False
 

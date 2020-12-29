@@ -23,7 +23,9 @@ def draw(field_1, field_2, ca_1, ca_2):
     screen.fill((100, 150, 100))
     for i in range(len(field_1)):
         for j in range(len(field_1[i])):
-            pygame.draw.rect(screen, ca_1.state_to_color(field_1[i][j], True), (i * cell_size, j * cell_size, cell_size, cell_size))
-            pygame.draw.circle(screen, ca_2.state_to_color(field_2[i][j], False), ((i + 0.5) * cell_size, (j + 0.5) * cell_size), cell_size / 3)
+            pygame.draw.rect(screen, ca_1.state_to_color(field_1[i][j], True),
+                             (i * cell_size, j * cell_size, cell_size, cell_size))
+            pygame.draw.circle(screen, ca_2.state_to_color(field_2[i][j], False),
+                               ((i + 0.5) * cell_size, (j + 0.5) * cell_size), cell_size / 3)
 
     pygame.display.flip()
